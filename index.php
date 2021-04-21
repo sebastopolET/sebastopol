@@ -11,5 +11,12 @@ $location = "Addis Ababa";
 $weather = "cold";
    file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in ".$location.": ". $weather);
 }
+else{
+
+file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
+
+
+}
+
 ?>
 
