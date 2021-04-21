@@ -1,5 +1,10 @@
 <?php
- $conn = mysqli_connect( "http://sql3.freemysqlhosting.net", "sql3407329" , "h3tzsVCxA1" , "sql3407329") or die("couldn't connect to database");
+ $conn = mysqli_connect( "http://sql3.freemysqlhosting.net", "sql3407329" , "h3tzsVCxA1" , "sql3407329");
+
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
  $query = "create table userdb(id int , name varchar(20))";
  mysqli_query($conn , $query);
 
