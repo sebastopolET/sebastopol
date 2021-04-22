@@ -61,28 +61,9 @@ else if($message == "Home"){
   
 }
 
-
-else if( substr($message , 0 , 2 ) == "SA" ){
-               $keyboard = [
-                ['7', '8', '9'],
-                ['4', '5', '6'],
-                ['1', '2', '3'],
-                     ['0']
-            ];
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard, 
-                'resize_keyboard' => true, 
-                'one_time_keyboard' => true
-            ]);
-
-        file_get_contents($path."/sendMessage?chat_id=".$chatId."&text=".$message."?reply_markup=".$reply_markup);
-}
-
-else if( $message == "/weather"){
-        $location = "Addis Ababa";
-        $weather = "cold";
-        file_get_contents($path."/sendMessage?chat_id=".$chatId."&text= "Here is the weather in ".$location.": ". $weather);
+else if( substr( $message , 0 , 3)  == "www"){
+        $web = file_get_contents($message);
+        file_get_contents($path."/sendMessage?chat_id=".$chatId."&text=". $web);
 }
 
 else{
