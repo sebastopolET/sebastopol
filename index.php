@@ -6,7 +6,8 @@ $update = json_decode(file_get_contents("php://input"), TRUE);
 
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
-
+file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
+/*
 switch($message){
   case "/start" : 
             $keyboard = [
@@ -43,5 +44,5 @@ function sendMessage( $chatId , $text , $style){
   }
         
 }
-
+*/
 ?>
