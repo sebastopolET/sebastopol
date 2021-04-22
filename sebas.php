@@ -11,10 +11,8 @@
    die("Connection failed: " . mysqli_connect_error());
  }
 
- $query = "INSERT INTO awkase(key , value) VALUES(1 , 'testing')";
- mysqli_query($conn , $query);
 
- $query = "select * from userdb";
+ $query = "select * from awkase";
  $result = mysqli_query($conn, $query);
 
  if (mysqli_num_rows($result) > 0) {
