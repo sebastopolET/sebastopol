@@ -6,20 +6,20 @@ $update = json_decode(file_get_contents("php://input"), TRUE);
 
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
-//file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
 
- sendMessage( $chatId , $message , "normal" );
-       
-function sendMessage( $chatId , $text , $style){
- 
-  if( strpos($style , "normal") === 0 ){
-           file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$text);
-   }
-  else {
-    file_get_contents($path. "/sendMessage?chat_id=". $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($style));
-  }
-        
-}
+$keyboard = [
+              'keyboard' => [['Button1'],['Button2']],
+              'resize_keyboard' => true,
+              'one_time_keyboard' => true,
+              'selective' => true
+            ];
+
+$keyboard = json_encode($keyboard, true);
+
+
+file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
+file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$reply."&parse_mode=HTML&reply_markup=$keyboard");
+
 
 /*
 switch($message){
