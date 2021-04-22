@@ -29,6 +29,21 @@ else if(substr($message,0,2) == "db" ){
    file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message." inserted into Database Successfully");
 }
 
+else if($message == "/start"){
+ $keyboard = [
+        "keyboard" => [
+            [
+                ["text" =>  urlencode('Welcome to Sebastopol -> #') ]
+            ]
+        ],
+        "resize_keyboard" => true
+    ];
+ file_get_contents($path. "/sendMessage?chat_id="
+        . $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($keyboard));
+ 
+}
+
+
 else{
 
 file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
