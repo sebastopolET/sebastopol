@@ -1,23 +1,26 @@
 <?php
- $conn = mysqli_connect( "http://sql3.freemysqlhosting.net", "sql3407329" , "h3tzsVCxA1" , "sql3407329");
 
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+ $dbhost = "freedb.tech";
+ $dbuser = "freedbtech_ineeddb";
+ $dbpass = "polkmn";
+ $dbname = "freedbtech_awkase";
 
- $query = "create table userdb(id int , name varchar(20))";
+ $conn = mysqli_connect( $dbhost , $dbuser , $dbpass , $dbname );
+
+ if (!$conn) {
+   die("Connection failed: " . mysqli_connect_error());
+ }
+
+ $query = "INSERT INTO awkase(key , value) VALUES(1 , 'testing')";
  mysqli_query($conn , $query);
 
- $query = "INSERT INTO userdb(id, name) VALUES(1 , 'testing')";
- mysqli_query($conn , $query);
+ $query = "select * from userdb";
+ $result = mysqli_query($conn, $query);
 
-$query = "select * from userdb";
-$result = mysqli_query($conn, $query);
-
-if (mysqli_num_rows($result) > 0) {
+ if (mysqli_num_rows($result) > 0) {
   // output data of each row
   while($row = mysqli_fetch_assoc($result)) {
-    echo "id: " . $row["id"]. " - Name: " . $row["name"]. " <br>";
+    echo  $row["key"]. " - is: " . $row["value"]. " <br>";
   }
 } else {
   echo "0 results";
