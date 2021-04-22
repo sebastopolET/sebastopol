@@ -37,7 +37,7 @@ else{
 
 function sendMessage( $chatId , $text , $style){
  
-  if( $syle == "normal"){
+  if( $style == "normal"){
            file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$text);
   }
   else {
