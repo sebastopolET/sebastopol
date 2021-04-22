@@ -61,7 +61,7 @@ else if($message == "Home"){
   
 }
 
-/*
+
 else if( substr($message , 0 , 2 ) == "SA" ){
                $keyboard = [
                 ['7', '8', '9'],
@@ -76,17 +76,17 @@ else if( substr($message , 0 , 2 ) == "SA" ){
                 'one_time_keyboard' => true
             ]);
 
-        file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message."?reply_markup=".$reply_markup);
+        file_get_contents($path."/sendMessage?chat_id=".$chatId."&text=".$message."?reply_markup=".$reply_markup);
 }
-*/
+
 else if( $message == "/weather"){
         $location = "Addis Ababa";
         $weather = "cold";
-        file_get_contents($path."/sendmessage?chat_id=".$chatId."&text= "Here is the weather in ".$location.": ". $weather);
+        file_get_contents($path."/sendMessage?chat_id=".$chatId."&text= "Here is the weather in ".$location.": ". $weather);
 }
 
 else{
-        file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
+        file_get_contents($path."/sendMessage?chat_id=".$chatId."&text=".$message);
 }
 
 
