@@ -7,20 +7,62 @@ $update = json_decode(file_get_contents("php://input"), TRUE);
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
 
-$keyboard = [
-              'keyboard' => [['Button1'],['Button2']],
-              'resize_keyboard' => true,
-              'one_time_keyboard' => true,
-              'selective' => true
+if( $message == "/start"){
+   $keyboard = [
+          "keyboard" => [
+              [
+                  ["text" =>  urlencode('Welcome') ]
+              ]
+          ],
+          "resize_keyboard" => true
+      ];
+
+    file_get_contents($path. "/sendMessage?chat_id=". $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($keyboard));
+}
+else if( $message == "Welcome"){
+      $keyboard = [
+                "keyboard" => [
+                    [
+                        ["text" =>  urlencode('Ready') ]
+                    ]
+                ],
+                "resize_keyboard" => true
             ];
 
-$keyboard = json_encode($keyboard, true);
+    file_get_contents($path. "/sendMessage?chat_id=". $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($keyboard));
 
+}
 
-file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
-file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$reply."&parse_mode=HTML&reply_markup=$keyboard");
+else if($message == "Ready"){
+    $keyboard = [
+                "keyboard" => [
+                    [
+                        ["text" =>  urlencode('Home') ]
+                    ]
+                ],
+                "resize_keyboard" => true
+            ];
 
+    file_get_contents($path. "/sendMessage?chat_id=". $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($keyboard));
+  
+}
 
+else if($message == "home"){
+    $keyboard = [
+                "keyboard" => [
+                    [
+                        ["text" =>  urlencode('Welcome') ]
+                    ]
+                ],
+                "resize_keyboard" => true
+            ];
+
+    file_get_contents($path. "/sendMessage?chat_id=". $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($keyboard));
+  
+}
+else{
+        file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
+}
 /*
 switch($message){
   case "/start" : 
