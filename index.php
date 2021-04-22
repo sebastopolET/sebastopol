@@ -11,7 +11,9 @@ if( $message == "/start"){
    $keyboard = [
           "keyboard" => [
               [
-                  ["text" =>  urlencode('Welcome') ]
+                  ["text" =>  urlencode('Welcome') ] ,
+                  ["text" =>  urlencode('Register') ] ,
+                  ["text" =>  urlencode('Book') ]
               ]
           ],
           "resize_keyboard" => true
