@@ -1,15 +1,5 @@
 <?php
 
- $dbhost = "freedb.tech";
- $dbuser = "freedbtech_ineeddb";
- $dbpass = "polkmn";
- $dbname = "freedbtech_awkase";
-
- $conn = mysqli_connect( $dbhost , $dbuser , $dbpass , $dbname );
- if (!$conn) {
-   die("Connection failed: " . mysqli_connect_error());
- }
-
 $path = "https://api.telegram.org/bot1746146428:AAF-ID1HMj-jpTCNyTqHE0w48RRjFKJRXP4";
 
 $update = json_decode(file_get_contents("php://input"), TRUE);
@@ -20,35 +10,40 @@ $message = $update["message"]["text"];
 if (strpos($message, "/weather") === 0) {
 $location = "Addis Ababa";
 $weather = "cold";
-   file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in ".$location.": ". $weather);
+    sendMessage( $chatId , "Here's the weather in ".$location.": ". $weather , "normal" );
 }
 else if(substr($message,0,2) == "db" ){
-   $query = "insert into awkase(key,value) values('contributed' , '".$message."')";
-   mysqli_query($conn, $query);
-   mysqli_close($conn);
-   file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message." inserted into Database Successfully");
+    sendMessage( $chatId , $message." inserted into Database Successfully" , "normal" );
 }
 
 else if($message == "/start"){
  $keyboard = [
         "keyboard" => [
             [
-                ["text" =>  urlencode('Welcome to Sebastopol -> #') ]
+                ["text" =>  urlencode('Get Started') ]
+                ["text" =>  urlencode('Login/Register') ]
+                ["text" =>  urlencode('Visit Website') ]
+                ["text" =>  urlencode('About Us') ]
             ]
         ],
         "resize_keyboard" => true
     ];
- file_get_contents($path. "/sendMessage?chat_id="
-        . $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($keyboard));
- 
+  sendMessage( $chatId , $message , $keyboard );
 }
 
-
 else{
+     sendMessage( $chatId , $message , "normal" );
+}
 
-file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
-
-
+function sendMessage( $chatId , $text , $style){
+ 
+  if( $button == "normal"){
+           file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$text);
+  }
+  else {
+    file_get_contents($path. "/sendMessage?chat_id=". $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($style));
+  }
+        
 }
 
 ?>
