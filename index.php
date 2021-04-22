@@ -61,7 +61,7 @@ else if($message == "Home"){
   
 }
 
-
+/*
 else if( substr($message , 0 , 2 ) == "SA" ){
                $keyboard = [
                 ['7', '8', '9'],
@@ -78,7 +78,7 @@ else if( substr($message , 0 , 2 ) == "SA" ){
 
         file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message."?reply_markup=".$reply_markup);
 }
-
+*/
 else if( $message == "/weather"){
         $location = "Addis Ababa";
         $weather = "cold";
