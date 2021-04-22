@@ -47,7 +47,7 @@ else if($message == "Ready"){
   
 }
 
-else if($message == "home"){
+else if($message == "Home"){
     $keyboard = [
                 "keyboard" => [
                     [
@@ -60,45 +60,34 @@ else if($message == "home"){
     file_get_contents($path. "/sendMessage?chat_id=". $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($keyboard));
   
 }
+
+
+else if( substr($message , 0 , 2 ) == "SA" ){
+               $keyboard = [
+                ['7', '8', '9'],
+                ['4', '5', '6'],
+                ['1', '2', '3'],
+                     ['0']
+            ];
+
+            $reply_markup = $telegram->replyKeyboardMarkup([
+                'keyboard' => $keyboard, 
+                'resize_keyboard' => true, 
+                'one_time_keyboard' => true
+            ]);
+
+        file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message."?reply_markup=".$reply_markup);
+}
+
+else if( $message == "/weather"){
+        $location = "Addis Ababa";
+        $weather = "cold";
+        file_get_contents($path."/sendmessage?chat_id=".$chatId."&text= "Here is the weather in ".$location.": ". $weather);
+}
+
 else{
         file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$message);
 }
-/*
-switch($message){
-  case "/start" : 
-            $keyboard = [
-                            "keyboard" => [
-                                [
-                                    ["text" =>  urlencode('Get Started') ]
-                                    
-                                ]
-                            ],
-                        "resize_keyboard" => true
-                      ];
-            sendMessage( $chatId , $message , $keyboard );
-            break;
-  case "/weather":
-        $location = "Addis Ababa";
-        $weather = "cold";
-        sendMessage( $chatId , "Here's the weather in ".$location.": ". $weather , "normal" );
-        break;
 
-  default:
-     sendMessage( $chatId , $message , "normal" );
-     if( substr($message,0,2) == "db"){
-            sendMessage( $chatId , $message." inserted into Database Successfully" , "normal" );
-     
-}
 
-function sendMessage( $chatId , $text , $style){
- 
-  if( strpos($style , "normal") === 0 ){
-           file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$text);
-   }
-  else {
-    file_get_contents($path. "/sendMessage?chat_id=". $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($style));
-  }
-        
-}
-*/
 ?>
