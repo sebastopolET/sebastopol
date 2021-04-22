@@ -7,39 +7,37 @@ $update = json_decode(file_get_contents("php://input"), TRUE);
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
 
-if (strpos($message, "/weather") === 0) {
-$location = "Addis Ababa";
-$weather = "cold";
-    sendMessage( $chatId , "Here's the weather in ".$location.": ". $weather , "normal" );
-}
-else if(substr($message,0,2) == "db" ){
-    sendMessage( $chatId , $message." inserted into Database Successfully" , "normal" );
-}
+switch($message){
+  case "/start" : 
+            $keyboard = [
+                            "keyboard" => [
+                                [
+                                    ["text" =>  urlencode('Get Started') ]
+                                    
+                                ]
+                            ],
+                        "resize_keyboard" => true
+                      ];
+            sendMessage( $chatId , $message , $keyboard );
+            break;
+  case "/weather":
+        $location = "Addis Ababa";
+        $weather = "cold";
+        sendMessage( $chatId , "Here's the weather in ".$location.": ". $weather , "normal" );
+        break;
 
-else if($message == "/start"){
- $keyboard = [
-        "keyboard" => [
-            [
-                ["text" =>  urlencode('Get Started') ]
-                ["text" =>  urlencode('Login/Register') ]
-                ["text" =>  urlencode('Visit Website') ]
-                ["text" =>  urlencode('About Us') ]
-            ]
-        ],
-        "resize_keyboard" => true
-    ];
-  sendMessage( $chatId , $message , $keyboard );
-}
-
-else{
+  default:
      sendMessage( $chatId , $message , "normal" );
+     if( substr($message,0,2) == "db"){
+            sendMessage( $chatId , $message." inserted into Database Successfully" , "normal" );
+     
 }
 
 function sendMessage( $chatId , $text , $style){
  
-  if( $style == "normal"){
+  if( strpos($style , "normal") === 0 ){
            file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=".$text);
-  }
+   }
   else {
     file_get_contents($path. "/sendMessage?chat_id=". $chatId . "&text=" . urlencode("MENU") . "&reply_markup=" . json_encode($style));
   }
@@ -47,4 +45,3 @@ function sendMessage( $chatId , $text , $style){
 }
 
 ?>
-
