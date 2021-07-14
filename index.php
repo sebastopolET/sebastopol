@@ -1,7 +1,9 @@
 <?php
 
 //$path = "https://api.telegram.org/bot1746146428:AAF-ID1HMj-jpTCNyTqHE0w48RRjFKJRXP4";
-$path = "https://api.telegram.org/bot1703520207:AAHWzisIZxsltY6a0YQhMpUcAA8zrZxyTK4";
+$path = "https://api.telegram.org/bot1883379190:AAEejaqqKCjs_H5g9ZRTwvd9dhXiIM_HZig";
+//1883379190:AAEejaqqKCjs_H5g9ZRTwvd9dhXiIM_HZig
+
 $update = json_decode(file_get_contents("php://input"), TRUE);
 
 $chatId = $update["message"]["chat"]["id"];
@@ -11,7 +13,7 @@ $message = $update["message"]["text"];
        $from = $_GET['from'];
        $text = $_GET['text'];
        echo "From ".$from." Message Body ".$text;
-       file_get_contents($path."/sendMessage?chat_id=476779655&text=From ".$from."Message Body ".$text);
+       file_get_contents($path."/sendMessage?chat_id=1788583880&text=From ".$from."Message Body ".$text);
    }
 
 
